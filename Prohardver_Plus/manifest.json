@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+
+  "name": "Prohardver! Plusz",
+
+  "description": "A Prohardver! lapcsalád funkcióit kiegészítő bővítmény.",
+
+  "version": "1.0",
+
+  "icons": { "16": "PH_plus_16x16.png",
+             "48": "PH_plus_48x48.png",
+            "128": "PH_plus_128x128.png" },
+
+	"browser_action": {
+	  "default_icon": "PH_plus_19x19.png",
+	  "default_title": "Prohardver! Plusz",    // optional; shown in tooltip
+	  "default_popup": "popup.html"
+	}, 
+
+  "background": {
+    "persistent": true,
+    "scripts": ["background.js"]
+  },
+   "content_scripts": [ {
+      "css": [ "css/styles.css" ],
+      "js": [
+        "js/jquery-2.0.3.min.js", "js/textareaconverter.js"
+      ],
+      "matches": [ "http://prohardver.hu/*", "http://itcafe.hu/*", "http://gamepod.hu/*", "http://logout.hu/*", "http://mobilarena.hu/*", "http://hardverapro.hu/*" ],
+      "run_at": "document_end"
+  } ],
+
+  "permissions": ["tabs",
+    "http://prohardver.hu/*", "http://itcafe.hu/*", "http://gamepod.hu/*", "http://logout.hu/*", "http://mobilarena.hu/*", "http://hardverapro.hu/*"
+  ]
+}

@@ -1,0 +1,24 @@
+#google-search-languages-container {
+  display: inline-block;
+  border: none;
+  padding: 0;
+  
+  position: relative;
+  bottom: 7.5px;
+}
+
+#google-search-languages-container select {
+  margin: 0px 5px;
+  padding: 0px 5px;
+  height: 30px;
+}
+
+#sblsbb {
+ /* safe search-nél a gomb egy nagyobb konténerbe kerül, most egymás mellett lesznek ebben a dobozban */
+  display: inline-block;
+}
+
+.sbibtd, #searchform.big>#tsf, .big form#tsf, form#tsf {
+  max-width:none !important;
+}
+

@@ -1,0 +1,106 @@
+{
+  "name": "Prohardver! Hotkeys",
+  "author": "Sk8erPeter",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Prohardver! hotkeys! This extension was created with the awesome extensionizr.com",
+  "homepage_url": "http://extensionizr.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "hu",
+  "options_ui": {
+    "page": "src/options_custom/index.html"
+    // "page": "src/options_custom/justatestpete/options.html"
+    // , "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "icons/*.png"
+  ],
+  "permissions": [
+    "http://prohardver.hu/*",
+    "http://mobilarena.hu/*",
+    "http://logout.hu/*",
+    "http://itcafe.hu/*",
+    "http://gamepod.hu/*",
+    "http://hardverapro.hu/*",
+    "http://bitmarket.hu/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://prohardver.hu/muvelet/hsz/*",
+        "http://mobilarena.hu/muvelet/hsz/*",
+        "http://logout.hu/muvelet/hsz/*",
+        "http://itcafe.hu/muvelet/hsz/*",
+        "http://gamepod.hu/muvelet/hsz/*",
+        "http://bitmarket.hu/muvelet/termek_velemeny/*",
+        
+        "http://prohardver.hu/muvelet/privat/*",
+        "http://mobilarena.hu/muvelet/privat/*",
+        "http://logout.hu/muvelet/privat/*",
+        "http://itcafe.hu/muvelet/privat/*",
+        "http://gamepod.hu/muvelet/privat/*",
+        "http://bitmarket.hu/muvelet/privat/*",
+        
+        "http://hardverapro.hu/privat_uzenet/*",
+        "http://hardverapro.hu/apro/*",
+        
+        "http://logout.hu/muvelet/teszt/uj.php",
+        "http://logout.hu/muvelet/bejegyzes/uj.php",
+        
+        "http://prohardver.hu/muvelet/tema/uj.php*",
+        "http://mobilarena.hu/muvelet/tema/uj.php*",
+        "http://logout.hu/muvelet/tema/uj.php*",
+        "http://itcafe.hu/muvelet/tema/uj.php*",
+        "http://gamepod.hu/muvelet/tema/uj.php*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/dqdb-hotkeys/keylib.js",
+        "js/dqdb-hotkeys/ph_hotkeys_in_editor.user.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://prohardver.hu/forum/index.html",
+        "http://mobilarena.hu/forum/index.html",
+        "http://logout.hu/forum/index.html",
+        "http://itcafe.hu/forum/index.html",
+        "http://gamepod.hu/forum/index.html",
+
+        "http://prohardver.hu/temak/*",
+        "http://mobilarena.hu/temak/*",
+        "http://logout.hu/temak/*",
+        "http://logout.hu/cikk/*",
+        "http://logout.hu/cikkek/*",
+        "http://itcafe.hu/temak/*",
+        "http://gamepod.hu/temak/*",
+                
+        "http://prohardver.hu/tema/*",
+        "http://mobilarena.hu/tema/*",
+        "http://logout.hu/tema/*",
+        "http://itcafe.hu/tema/*",
+        "http://gamepod.hu/tema/*",
+        
+        "http://bitmarket.hu/index.html",
+        "http://bitmarket.hu/termek/*",
+        "http://bitmarket.hu/termekek/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "src/inject/forum_mod.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

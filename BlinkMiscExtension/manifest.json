@@ -1,0 +1,44 @@
+{
+
+  "name": "Pete's Misc. Blink extension",
+  "description": "Modifications for different sites",
+  "version": "0.1",
+  "permissions": [
+    "activeTab", "webRequest", "webRequestBlocking", "http://*/*", "https://*/*"
+  ],
+  "background": {
+    "scripts": ["js/background.js"]
+  },  
+  "content_scripts": [
+    { 
+      "matches": ["http://agar.io/*"],
+      "css" : ["css/styles.css"],
+      "js" : ["js/agar_content_script.js"],
+      "run_at" : "document_end"
+   },
+   { 
+      "matches": ["http://wikiszotar.hu/*"],
+      "css" : ["css/styles_wikiszotar.css"],
+      "run_at" : "document_start"
+   },
+   { 
+      "matches": ["http://prohardver.hu/*"],
+      "css" : ["css/styles.css"],
+      "js" : ["js/prohardver_content_script.js"],
+      "run_at" : "document_end"
+   },
+   { 
+      "matches": ["https://ncore.cc/*"],
+      "css" : ["css/styles_ncore.css"],
+      "js" : ["js/ncore_content_script.js"],
+      "run_at" : "document_end"
+   }
+  ],
+  "icons": {
+    "16": "images/gear16.png",
+    "32": "images/gear32.png",
+    "48": "images/gear48.png",
+    "128": "images/gear128.png"
+  },  
+  "manifest_version": 2
+}
