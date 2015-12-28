@@ -3,6 +3,8 @@
  * @author Pete
  */
 
+console.log("Hello from Google Languages extension!");
+ 
 var searchFormId = 'tsf';
 var inputTextFieldId = 'lst-ib';
  
