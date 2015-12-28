@@ -1,2 +1,2 @@
 # Pete_Blink_extensions
-Custom Blink extensions
+Custom Blink extensions by Pete
