@@ -1,0 +1,23 @@
+{
+  "name": "Jira extension",
+  "description": "Modifications for Jira to make it more usable",
+  "version": "0.1",
+  "permissions": [
+    "activeTab", "http://*/*", "https://*/*"
+  ],
+  "content_scripts": [
+   { 
+      "matches": ["http://jira.alm.mentorg.com:8080/*"],
+      "css" : ["css/styles_jira.css"],
+	  "js" : ["js/jira_mentorg_content_script.js"],
+      "run_at" : "document_start"
+   }
+  ],
+  "icons": {
+    "16": "img/jira_16x16.png",
+    "32": "img/jira_32x32.png",
+    "48": "img/jira_48x48.png",
+    "128": "img/jira_128x128.png"
+  },  
+  "manifest_version": 2
+}
