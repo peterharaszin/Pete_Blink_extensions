@@ -1,0 +1,7 @@
+div[data-test-giftwrap], .FullPageModal__scroller {
+	display:none;
+}
+
+div[data-reactid="3"] {
+	position:static !important;
+}

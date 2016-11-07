@@ -69,3 +69,20 @@ body {
   margin:-1px; miatt, a search típusú mezőnél viszont igen... */
   margin:0px !important;
 }
+
+/* Social ikonok áthelyezése, mert az extension által hozzáadott további keresőmezőkbe alapból belelógnának */
+#navi .social {
+    position: absolute;
+    margin-left:8px;
+	right: 12px;
+}
+
+#navi .social a { 
+    width: 19px;
+    height: 19px;
+    float: left;
+    display: inline;
+    padding: 0 2px 0 0;
+    margin: 0 2px 0 0;
+    text-align: center;
+}

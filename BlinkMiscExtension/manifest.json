@@ -32,6 +32,17 @@
       "css" : ["css/styles_ncore.css"],
       "js" : ["js/ncore_content_script.js"],
       "run_at" : "document_end"
+   },
+   { 
+      "matches": ["http://www.expansys.hu/*"],
+      "js" : ["js/expansys_content_script.js"],
+      "run_at" : "document_end"
+   },
+   { 
+      "matches": ["http://*.pinterest.com/*", "https://*.pinterest.com/*"],
+	  "css" : ["css/styles_pinterest.css"],
+      "js" : ["js/zepto.min.js", "js/pinterest_content_script.js"],
+      "run_at" : "document_end"
    }
   ],
   "icons": {

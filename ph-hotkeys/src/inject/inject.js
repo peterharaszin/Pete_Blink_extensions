@@ -1,3 +1,5 @@
+console.log("PH! hotkeys! :) (scripts/inject.js)");
+
 chrome.extension.sendMessage({}, function(response) {
   var readyStateCheckInterval = setInterval(function() {
     if (document.readyState === "complete") {
@@ -5,7 +7,7 @@ chrome.extension.sendMessage({}, function(response) {
 
       // ----------------------------------------------------------
       // This part of the script triggers when page is done loading
-      console.log("PH! hotkeys! :) (scripts/inject.js)");
+      console.log("PH! hotkeys READY! :) (scripts/inject.js)");
       // ----------------------------------------------------------
 
 //    console.log("Changing textarea classes...");

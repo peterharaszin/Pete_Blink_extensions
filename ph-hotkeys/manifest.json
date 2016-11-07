@@ -20,49 +20,50 @@
     "icons/*.png"
   ],
   "permissions": [
-    "http://prohardver.hu/*",
-    "http://mobilarena.hu/*",
-    "http://logout.hu/*",
-    "http://itcafe.hu/*",
-    "http://gamepod.hu/*",
-    "http://hardverapro.hu/*",
-    "http://bitmarket.hu/*",
+    "https://prohardver.hu/*",
+    "https://mobilarena.hu/*",
+    "https://logout.hu/*",
+    "https://itcafe.hu/*",
+    "https://gamepod.hu/*",
+    "https://hardverapro.hu/*",
+    "https://bitmarket.hu/*",
     "storage"
   ],
   "content_scripts": [
     {
       "matches": [
-        "http://prohardver.hu/muvelet/hsz/*",
-        "http://mobilarena.hu/muvelet/hsz/*",
-        "http://logout.hu/muvelet/hsz/*",
-        "http://itcafe.hu/muvelet/hsz/*",
-        "http://gamepod.hu/muvelet/hsz/*",
-        "http://bitmarket.hu/muvelet/termek_velemeny/*",
+        "https://prohardver.hu/muvelet/hsz/*",
+        "https://mobilarena.hu/muvelet/hsz/*",
+        "https://logout.hu/muvelet/hsz/*",
+        "https://itcafe.hu/muvelet/hsz/*",
+        "https://gamepod.hu/muvelet/hsz/*",
+        "https://bitmarket.hu/muvelet/termek_velemeny/*",
         
-        "http://prohardver.hu/muvelet/privat/*",
-        "http://mobilarena.hu/muvelet/privat/*",
-        "http://logout.hu/muvelet/privat/*",
-        "http://itcafe.hu/muvelet/privat/*",
-        "http://gamepod.hu/muvelet/privat/*",
-        "http://bitmarket.hu/muvelet/privat/*",
+        "https://prohardver.hu/muvelet/privat/*",
+        "https://mobilarena.hu/muvelet/privat/*",
+        "https://logout.hu/muvelet/privat/*",
+        "https://itcafe.hu/muvelet/privat/*",
+        "https://gamepod.hu/muvelet/privat/*",
+        "https://bitmarket.hu/muvelet/privat/*",
         
-        "http://hardverapro.hu/privat_uzenet/*",
-        "http://hardverapro.hu/apro/*",
+        "https://hardverapro.hu/privat_uzenet/*",
+        "https://hardverapro.hu/apro/*",
         
-        "http://logout.hu/muvelet/teszt/uj.php",
-        "http://logout.hu/muvelet/bejegyzes/uj.php",
+        "https://logout.hu/muvelet/teszt/uj.php",
+        "https://logout.hu/muvelet/bejegyzes/uj.php",
         
-        "http://prohardver.hu/muvelet/tema/uj.php*",
-        "http://mobilarena.hu/muvelet/tema/uj.php*",
-        "http://logout.hu/muvelet/tema/uj.php*",
-        "http://itcafe.hu/muvelet/tema/uj.php*",
-        "http://gamepod.hu/muvelet/tema/uj.php*"
+        "https://prohardver.hu/muvelet/tema/uj.php*",
+        "https://mobilarena.hu/muvelet/tema/uj.php*",
+        "https://logout.hu/muvelet/tema/uj.php*",
+        "https://itcafe.hu/muvelet/tema/uj.php*",
+        "https://gamepod.hu/muvelet/tema/uj.php*"
       ],
       "css": [
         "src/inject/inject.css"
       ],
       "js": [
-        "js/dqdb-hotkeys/keylib.js",
+        "js/jquery/jquery-2.2.4.min.js",
+		"js/dqdb-hotkeys/keylib.js",
         "js/dqdb-hotkeys/ph_hotkeys_in_editor.user.js",
         "src/inject/inject.js"
       ],
@@ -70,34 +71,35 @@
     },
     {
       "matches": [
-        "http://prohardver.hu/forum/index.html",
-        "http://mobilarena.hu/forum/index.html",
-        "http://logout.hu/forum/index.html",
-        "http://itcafe.hu/forum/index.html",
-        "http://gamepod.hu/forum/index.html",
+        "https://prohardver.hu/forum/index.html",
+        "https://mobilarena.hu/forum/index.html",
+        "https://logout.hu/forum/index.html",
+        "https://itcafe.hu/forum/index.html",
+        "https://gamepod.hu/forum/index.html",
 
-        "http://prohardver.hu/temak/*",
-        "http://mobilarena.hu/temak/*",
-        "http://logout.hu/temak/*",
-        "http://logout.hu/cikk/*",
-        "http://logout.hu/cikkek/*",
-        "http://itcafe.hu/temak/*",
-        "http://gamepod.hu/temak/*",
+        "https://prohardver.hu/temak/*",
+        "https://mobilarena.hu/temak/*",
+        "https://logout.hu/temak/*",
+        "https://logout.hu/cikk/*",
+        "https://logout.hu/cikkek/*",
+        "https://itcafe.hu/temak/*",
+        "https://gamepod.hu/temak/*",
                 
-        "http://prohardver.hu/tema/*",
-        "http://mobilarena.hu/tema/*",
-        "http://logout.hu/tema/*",
-        "http://itcafe.hu/tema/*",
-        "http://gamepod.hu/tema/*",
+        "https://prohardver.hu/tema/*",
+        "https://mobilarena.hu/tema/*",
+        "https://logout.hu/tema/*",
+        "https://itcafe.hu/tema/*",
+        "https://gamepod.hu/tema/*",
         
-        "http://bitmarket.hu/index.html",
-        "http://bitmarket.hu/termek/*",
-        "http://bitmarket.hu/termekek/*"
+        "https://bitmarket.hu/index.html",
+        "https://bitmarket.hu/termek/*",
+        "https://bitmarket.hu/termekek/*"
       ],
       "css": [
         "src/inject/inject.css"
       ],
       "js": [
+		"js/jquery/jquery-2.2.4.min.js",
         "src/inject/forum_mod.js"
       ],
       "run_at": "document_start"
