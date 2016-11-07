@@ -9,11 +9,15 @@
   "content_scripts": [
     { 
       "matches": [
+		// http://www.google.com/supported_domains
+		// http://stackoverflow.com/questions/11069644/support-all-google-domains-in-a-content-script/11069916#11069916
+        // alternative option using include_globs:
+        // 1. http://stackoverflow.com/questions/18613731/chrome-extension-run-on-all-google-domains-and-a-specific-page/18616735#18616735
+        // 2. http://stackoverflow.com/questions/16186956/how-to-load-a-content-script-on-all-google-international-pages/16187588#16187588
+        // 3. include_globs: https://developer.chrome.com/extensions/content_scripts#match-patterns-globs
 		"https://www.google.hu/search*",
 		"https://www.google.com/search*",
 		"https://www.google.com/webhp*",
-		// http://www.google.com/supported_domains
-		// http://stackoverflow.com/questions/11069644/support-all-google-domains-in-a-content-script/11069916#11069916
 		"http://www.google.com/*", "https://www.google.com/*",
 		"http://www.google.ad/*", "https://www.google.ad/*",
 		"http://www.google.ae/*", "https://www.google.ae/*",
@@ -131,6 +135,7 @@
 		"http://www.google.mu/*", "https://www.google.mu/*",
 		"http://www.google.mv/*", "https://www.google.mv/*",
 		"http://www.google.mw/*", "https://www.google.mw/*",
+		"http://www.google.ng/*", "https://www.google.ng/*",
 		"http://www.google.com.mx/*", "https://www.google.com.mx/*",
 		"http://www.google.com.my/*", "https://www.google.com.my/*",
 		"http://www.google.co.mz/*", "https://www.google.co.mz/*",
