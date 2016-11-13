@@ -17,6 +17,12 @@
       "run_at" : "document_end"
    },
    { 
+      "matches": ["https://m.facebook.com/*"],
+      "css" : ["css/styles.css"],
+      "js" : ["js/util.js", "js/facebook_content_script.js"],
+      "run_at" : "document_end"
+   },
+   { 
       "matches": ["http://wikiszotar.hu/*"],
       "css" : ["css/styles_wikiszotar.css"],
       "run_at" : "document_start"
