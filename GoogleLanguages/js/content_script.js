@@ -1,4 +1,4 @@
-/**
+	/**
  * Content script for Google Languages
  * @author Pete
  */
@@ -246,7 +246,7 @@
 
         var currentLanguageKeySelected = getKeyFromHashValueOrQueryString("lr");
         var googleSearchSubmitButton = document.querySelector('button[name="btnG"]');
-        var googleSearchSubmitButtonParentNode = googleSearchSubmitButton.parentNode;
+        var googleSearchSubmitButtonParentNode = googleSearchSubmitButton.parentNode.parentNode;
         var googleSearchFormNode = googleSearchSubmitButtonParentNode.parentNode;
 
         var newFieldset = document.createElement("fieldset");
@@ -261,7 +261,8 @@
         newFieldset.appendChild(newLanguageSelect);
 
         // Insert the new element into the DOM before the Google button container
-        googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
+        // googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
+        // googleSearchFormNode.appendChild(newFieldset);
 
         // filetypes event handler
         var fileTypes = Object.keys(fileTypesValueTextPairs);
@@ -288,9 +289,10 @@
         newFieldset.appendChild(newFileTypeSelect);
 
         // Insert the new element into the DOM before the Google button container
-        googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
-
-        // console.log('inputTextField: ', inputTextField);
+        // googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
+		googleSearchFormNode.appendChild(newFieldset);
+        
+		// console.log('inputTextField: ', inputTextField);
         // console.log('inputTextField.value: ', inputTextField.value);
         // console.log('inputTextField.onsubmit: ', inputTextField.onsubmit);
         // console.log('window.onsubmit: ', window.onsubmit);

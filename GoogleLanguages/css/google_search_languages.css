@@ -1,11 +1,12 @@
-#google-search-languages-container {
+﻿#google-search-languages-container {
   display: inline-block;
   border: none;
   padding: 0;
   
   position: relative;
   /*bottom: 7.5px;*/
-  top: -14.5px;
+  left: 100%;
+  top: -42px;
 }
 
 #google-search-languages-container select {
