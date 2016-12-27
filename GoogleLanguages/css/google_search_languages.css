@@ -1,27 +1,32 @@
 ﻿#google-search-languages-container {
-  display: inline-block;
-  border: none;
-  padding: 0;
-  
-  position: relative;
-  /*bottom: 7.5px;*/
-  left: 100%;
-  top: -42px;
+	display: inline-block;
+	border: none;
+	padding: 0;
+
+	position: relative;
+	/*bottom: 7.5px;*/
+	left: 100%;
+	top: -42px;
+	float:left; /* not to overlap the links (like All, Images, Videos, etc.) */
+}
+
+#searchform {
+	height:40px; /* not to overlap the links (like All, Images, Videos, etc.) */
 }
 
 #google-search-languages-container select {
-  margin: 0px 5px;
-  padding: 0px 5px;
-  height: 40px;
-  border: 1px solid #d9d9d9;
+	margin: 0px 5px;
+	padding: 0px 5px;
+	height: 40px;
+	border: 1px solid #d9d9d9;
 }
 
 #sblsbb {
- /* safe search-nél a gomb egy nagyobb konténerbe kerül, most egymás mellett lesznek ebben a dobozban */
-  display: inline-block;
+	/* safe search-nél a gomb egy nagyobb konténerbe kerül, most egymás mellett lesznek ebben a dobozban */
+	display: inline-block;
 }
 
 .sbibtd, #searchform.big>#tsf, .big form#tsf, form#tsf {
-  max-width:none !important;
+	max-width:none !important;
 }
 
