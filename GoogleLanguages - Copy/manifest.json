@@ -1,4 +1,5 @@
 {
+
   "name": "Google Search Languages",
   "description": "Show available languages on the Google search site next to the search text field.",
   "version": "1.0.4",
@@ -210,7 +211,7 @@
 		"http://www.google.cat/*", "https://www.google.cat/*"		
 	  ],
       "css" : ["css/google_search_languages.css"],
-      "js" : ["js/zepto.min.js", "js/util.js", "js/content_script.js"],
+      "js" : ["js/content_script.js"],
       "run_at" : "document_start"
    }
   ],

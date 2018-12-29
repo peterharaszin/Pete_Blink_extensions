@@ -2,15 +2,12 @@
  * Content script for Google Languages
  * @author Pete
  */
-var searchFormId = 'tsf';
-var inputTextFieldSelector = 'input[name="q"]';
-var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
-
 (function() {
 
     console.log("Hello from Google Languages extension!");
-    console.log("Testing Zepto.js: ");
-    console.log($("#tsf"));
+
+    var searchFormId = 'tsf';
+    var inputTextFieldId = 'lst-ib';
 
     // available search languages
     var languageOptionValueTextPairs = {
@@ -78,6 +75,127 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
         "swf": "Shockwave Flash (.swf)"
     };
 
+    function parseQueryStringAsDict(queryString) {
+        if (!queryString || queryString === "") {
+            return null;
+        }
+
+        var queryDict = {};
+        queryString.substr(1).split("&").forEach(function(item) {
+            queryDict[item.split("=")[0]] = item.split("=")[1];
+        });
+
+        return queryDict;
+    }
+
+    /**
+     * Get query string values (as field-value pairs)
+     * 
+     * @returns {object} the query string values or null if there are no query string fields
+     * 
+     * @see http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/21152762#21152762
+     */
+    function getQueryStringValues() {
+        return parseQueryStringAsDict(window.location.search);
+    }
+
+    /**
+     * Get query string values in the hash (as field-value pairs)
+     * 
+     * @returns {object} the query string values in the hash string or null if there are no query string fields
+     * 
+     * @see http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/21152762#21152762
+     */
+    function getQueryStringValuesInHash() {
+        return parseQueryStringAsDict(window.location.hash);
+    }
+
+    function getNewQueryStringKeyValue(queryString, key, value) {
+        var queryStringValuesAsDict = parseQueryStringAsDict(queryString);
+        if (queryStringValuesAsDict === null) {
+            queryStringValuesAsDict = {}; // initialize as a new object
+        }
+
+        if (!queryStringValuesAsDict['q']) { // check if "q" key is set (it's the search value the user looks for in the search field)
+            // set q to the value that the user searches for
+            var inputTextField = document.getElementById(inputTextFieldId);
+            queryStringValuesAsDict['q'] = inputTextField.value.replace(' ', '+');
+
+        }
+        queryStringValuesAsDict[key] = value;
+
+        var newQueryString = "";
+        for (var currentValue in queryStringValuesAsDict) {
+            if (queryStringValuesAsDict.hasOwnProperty(currentValue)) {
+                console.log(currentValue + '=' + queryStringValuesAsDict[currentValue])
+                if (newQueryString !== "") {
+                    newQueryString += "&";
+                }
+                newQueryString += currentValue + '=' + queryStringValuesAsDict[currentValue];
+            }
+        }
+        console.log('newQueryString: ', newQueryString)
+        return newQueryString;
+    }
+
+    /**
+     * Get the query string field's value (from the series of field-value pairs)
+     * 
+     * @param {string} field The field's name
+     * @returns {string} The query string field's value
+     */
+    function getQueryStringValue(field) {
+        var queryDict = getQueryStringValues();
+        return (queryDict[field] !== undefined ? queryDict[field] : null);
+    }
+
+    /**
+     * @see http://stackoverflow.com/a/11920807/517705
+     */
+    function getHashValue(key) {
+        var regexpMatchArray = window.location.hash.match(new RegExp(key + '=([^&]*)'));
+        return (regexpMatchArray !== null && regexpMatchArray.length >= 2) ? regexpMatchArray[1] : '';
+    }
+
+    function getKeyFromHashValueOrQueryString(hashKey) {
+        var hashValue = getHashValue(hashKey);
+        // var hashValues = getQueryStringValuesInHash();
+        // var hashValue = hashValues[hashKey];
+
+        if (hashValue) {
+            return hashValue;
+        }
+
+        // egyébként meg a query stringből szedjük ki (pl. ?lr=lang_hu&...)
+        return getQueryStringValue(hashKey);
+    }
+
+    function getNewSelectList(selectId, selectClassName, selectFormName, optionValueTextPairs, currentValueSelected) {
+        var newSelect = document.createElement("select");
+        newSelect.setAttribute("id", selectId);
+        newSelect.setAttribute("class", selectClassName);
+        newSelect.setAttribute("role", "menu");
+        newSelect.setAttribute("name", selectFormName);
+
+        // var optionValueTextPairsKeys = Object.keys(optionValueTextPairs);
+        for (var optionValue in optionValueTextPairs) {
+            if (optionValueTextPairs.hasOwnProperty(optionValue)) {
+                // console.log(optionValue + " -> " + optionValueTextPairs[optionValue]);
+                var newOption = document.createElement("option");
+                newOption.setAttribute("value", optionValue);
+                newOption.setAttribute("class", "goog-menuitem");
+                newOption.setAttribute("role", "menuitem");
+                if (currentValueSelected === optionValue) {
+                    newOption.setAttribute("selected", "selected");
+                }
+                newOption.text = optionValueTextPairs[optionValue];
+                newSelect.appendChild(newOption);
+            }
+        }
+
+        return newSelect;
+    }
+
     function onSearchSubmit(e) {
         console.log('Submit button has been clicked: ', e);
     }
@@ -106,9 +224,7 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
 
             var timeoutId = 0;
             document.body.addEventListener("DOMNodeInserted", function() {
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                }
+                if (timeoutId) clearTimeout(timeoutId)
                 timeoutId = setTimeout(replaceRwtFunction, 1000);
             }, false);
         });
@@ -126,12 +242,12 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
 
     function init() {
         var searchForm = document.getElementById(searchFormId);
-        var inputTextField = document.querySelector(inputTextFieldSelector);
+        var inputTextField = document.getElementById(inputTextFieldId);
 
         var currentLanguageKeySelected = getKeyFromHashValueOrQueryString("lr");
-        var googleSearchSubmitButton = document.querySelector(googleSearchSubmitButtonSelector);
-        var googleSearchSubmitButtonParentNode = googleSearchSubmitButton.parentNode;
-        var googleSearchDiv = googleSearchSubmitButtonParentNode.parentNode;
+        var googleSearchSubmitButton = document.querySelector('button[name="btnG"]');
+        var googleSearchSubmitButtonParentNode = googleSearchSubmitButton.parentNode.parentNode;
+        var googleSearchFormNode = googleSearchSubmitButtonParentNode.parentNode;
 
         var newFieldset = document.createElement("fieldset");
         newFieldset.setAttribute("id", "google-search-languages-container");
@@ -145,8 +261,8 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
         newFieldset.appendChild(newLanguageSelect);
 
         // Insert the new element into the DOM before the Google button container
-        // googleSearchDiv.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
-        // googleSearchDiv.appendChild(newFieldset);
+        // googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
+        // googleSearchFormNode.appendChild(newFieldset);
 
         // filetypes event handler
         var fileTypes = Object.keys(fileTypesValueTextPairs);
@@ -173,8 +289,8 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
         newFieldset.appendChild(newFileTypeSelect);
 
         // Insert the new element into the DOM before the Google button container
-        // googleSearchDiv.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
-		googleSearchDiv.appendChild(newFieldset);
+        // googleSearchFormNode.insertBefore(newFieldset, googleSearchSubmitButtonParentNode);
+		googleSearchFormNode.appendChild(newFieldset);
         
 		// console.log('inputTextField: ', inputTextField);
         // console.log('inputTextField.value: ', inputTextField.value);
@@ -194,13 +310,11 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
             }
         }, false);
 
-		// new language selection
         newLanguageSelect.addEventListener("change", function() {
             var queryStringWithNewLangKey = getNewQueryStringKeyValue(window.location.hash.substring(0), 'lr', newLanguageSelect.value);
             window.location.hash = '#' + queryStringWithNewLangKey;
         });
 
-		// new file type selection
         newFileTypeSelect.addEventListener("change", function() {
             var currentSearchValue = inputTextField.value;
             var currentFileTypeSelected = newFileTypeSelect.value;
@@ -272,7 +386,7 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
     as_rights=
 
     */
-	var observer = new MutationObserver(function(mutations, observer) {
+	var observer = new MutationObserver(function(mutations) {
 	  mutations.forEach(function(mutation) {
 		if (!mutation.addedNodes) {
 			return;
@@ -281,7 +395,7 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
 		for (var i = 0; i < mutation.addedNodes.length; i++) {
 		  // do things to your newly added nodes here
 		  var node = mutation.addedNodes[i];
-		  if(node.nodeName === "INPUT" && node.name === "q") { // search input field has been added
+		  if(node.id === inputTextFieldId) {
 				// Cool, the element which we were waiting for has appeared, we can continue modifying the document
 				// stop watching using:
 				observer.disconnect();
@@ -312,18 +426,10 @@ var googleSearchSubmitButtonSelector = 'button[class="Tg7LZd"]';
         
     // }, false);
 	
+	console.log("stuff ");
+	
 	window.addEventListener("hashchange", function(e){
 		console.log("hash changed! ", e);
-		// TODO: put it directly into combo change event
-		// TODO: use this API instead of custom solution
-		// see https://developer.mozilla.org/en-US/docs/Web/API/URL
-		// see https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
-		var searchParams = new URLSearchParams(window.location.search);
-		var hashParams = new URLSearchParams(window.location.search);
-		for (let [key,value] of hashParams.entries()) {
-			searchParams.set(key, value);
-		}
-		window.location.search = searchParams.toString();
 	}, false);
 
 })();

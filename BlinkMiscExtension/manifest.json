@@ -1,5 +1,4 @@
 {
-
   "name": "Pete's Misc. Blink extension",
   "description": "Modifications for different sites",
   "version": "0.1",
@@ -11,6 +10,12 @@
   },  
   "content_scripts": [
     { 
+      "matches": ["http://192.168.1.1/*", "https://192.168.1.1/*", "http://tplinklogin.net/*", "https://tplinklogin.net/*"],
+      "css" : ["css/styles_router.css"],
+      "js" : ["js/zepto.min.js", "js/router_content_script.js"],
+      "run_at" : "document_end"
+   },
+   { 
       "matches": ["http://agar.io/*"],
       "css" : ["css/styles.css"],
       "js" : ["js/agar_content_script.js"],

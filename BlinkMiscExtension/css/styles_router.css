@@ -1,0 +1,10 @@
+
+
+.loginBtn {
+    height: 34px;
+    display: inline-block;
+    width: 113px;
+    margin-top: 30px;
+    background: url(../login/loginBtn.png);
+    cursor: pointer;
+}
